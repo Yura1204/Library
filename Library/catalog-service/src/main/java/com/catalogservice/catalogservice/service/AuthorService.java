@@ -30,8 +30,8 @@ public class AuthorService {
         return (author != null) ? convertToDTO(author) : null;
     }
 
-    public List<AuthorDTO> searchAuthorsByName(String name) {
-        List<Author> authors = authorRepository.findByNameContaining(name);
+    public List<AuthorDTO> searchAuthorsByName(String authorname) {
+        List<Author> authors = authorRepository.findByAuthorname(authorname);
         return authors.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class AuthorService {
     private AuthorDTO convertToDTO(Author author) {
         return AuthorDTO.builder()
                 .authorId(author.getAuthor_id())
-                .name(author.getName())
+                .authorname(author.getAuthorname())
                 .biography(author.getBiography())
                 .build();
     }
@@ -48,7 +48,7 @@ public class AuthorService {
     private Author convertToEntity(AuthorDTO authorDTO) {
         return Author.builder()
                 .author_id(authorDTO.getAuthorId())
-                .name(authorDTO.getName())
+                .authorname(authorDTO.getAuthorname())
                 .biography(authorDTO.getBiography())
                 .build();
     }

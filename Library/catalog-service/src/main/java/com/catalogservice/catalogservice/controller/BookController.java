@@ -43,9 +43,9 @@ public class BookController {
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
-    @GetMapping("/searchByAuthor/{author}")
-    public ResponseEntity<List<BookDTO>> searchBooksByAuthor(@PathVariable String author) {
-        List<BookDTO> books = bookService.searchBooksByAuthor(author);
+    @GetMapping("/searchByAuthor/{authorname}")
+    public ResponseEntity<List<BookDTO>> searchBooksByAuthor(@PathVariable String authorname) {
+        List<BookDTO> books = bookService.searchBooksByAuthor(authorname);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 }

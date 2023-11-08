@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="003-create-books-table" author="liquibase">
+        <createTable tableName="pub_books">
+            <column name="book_id" type="Serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="authorname" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="genre" type="VARCHAR(255)"/>
+            <column name="publisher" type="VARCHAR(255)"/>
+            <column name="year_published" type="INT"/>
+            <column name="file_url" type="VARCHAR(255)"/>
+            <column name="book_content" type="bytea"/>
+
+            <!-- Связь между book и author -->
+            <column name="author_id" type="BIGINT">
+                <constraints foreignKeyName="fk_books_authors" referencedTableName="pub_authors" referencedColumnNames="author_id"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

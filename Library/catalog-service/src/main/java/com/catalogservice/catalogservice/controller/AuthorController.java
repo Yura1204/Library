@@ -37,8 +37,8 @@ public class AuthorController {
     }
 
     @GetMapping("/searchByName/{name}")
-    public ResponseEntity<List<AuthorDTO>> searchAuthorsByName(@PathVariable String name) {
-        List<AuthorDTO> authors = authorService.searchAuthorsByName(name);
+    public ResponseEntity<List<AuthorDTO>> searchAuthorsByName(@PathVariable String authorname) {
+        List<AuthorDTO> authors = authorService.searchAuthorsByName(authorname);
         return new ResponseEntity<>(authors, HttpStatus.OK);
     }
 }

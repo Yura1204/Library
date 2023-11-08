@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="005-init-pub_books-data" author="liquibase">
+        <insert tableName="pub_books">
+            <column name="title" value="Скотный двор"/>
+            <column name="authorname" value="Джордж Оруэл"/>
+            <column name="description" value="Алегорическая сказка о политической ситуации."/>
+            <column name="genre" value="Антиутопия"/>
+            <column name="publisher" value="АСТ"/>
+            <column name="year_published" value="1945"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert tableName="pub_books">
+            <column name="title" value="1984"/>
+            <column name="authorname" value="Джордж Оруэл"/>
+            <column name="description" value="Антиутопический роман о тоталитарном обществе."/>
+            <column name="genre" value="Антиутопия"/>
+            <column name="publisher" value="АСТ"/>
+            <column name="year_published" value="1949"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert tableName="pub_books">
+            <column name="title" value="Ведьмак"/>
+            <column name="authorname" value="Анджей Сапковский"/>
+            <column name="description" value="Приключенческий фэнтези-роман."/>
+            <column name="genre" value="Фэнтези"/>
+            <column name="publisher" value="АСТ"/>
+            <column name="year_published" value="1990"/>
+            <column name="author_id" value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -37,8 +37,8 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public List<BookDTO> searchBooksByAuthor(String author) {
-        List<Book> books = bookRepository.findByAuthor_NameContaining(author);
+    public List<BookDTO> searchBooksByAuthor(String authorname) {
+        List<Book> books = bookRepository.findByAuthornameContaining(authorname);
         return books.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -49,6 +49,7 @@ public class BookService {
         return BookDTO.builder()
                 .id(book.getBook_id())
                 .title(book.getTitle())
+                .authorName(book.getAuthorname())
                 .description(book.getDescription())
                 .genre(book.getGenre())
                 .publisher(book.getPublisher())
@@ -61,6 +62,7 @@ public class BookService {
         return Book.builder()
                 .book_id(bookDTO.getId())
                 .title(bookDTO.getTitle())
+                .authorname(bookDTO.getAuthorName())
                 .description(bookDTO.getDescription())
                 .genre(bookDTO.getGenre())
                 .publisher(bookDTO.getPublisher())
@@ -71,11 +73,11 @@ public class BookService {
 
     public void updateEntityFromDTO(Book book, BookDTO bookDTO) {
         book.setTitle(bookDTO.getTitle());
+        book.setAuthorname(bookDTO.getAuthorName());
         book.setDescription(bookDTO.getDescription());
         book.setGenre(bookDTO.getGenre());
         book.setPublisher(bookDTO.getPublisher());
         book.setYear_published(bookDTO.getYear_published());
         book.setFileUrl(bookDTO.getFileUrl());
     }
-
 }
