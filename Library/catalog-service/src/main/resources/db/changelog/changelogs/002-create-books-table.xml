@@ -10,7 +10,6 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
-            <column name="authorname" type="VARCHAR(255)"/>
             <column name="description" type="TEXT"/>
             <column name="genre" type="VARCHAR(255)"/>
             <column name="publisher" type="VARCHAR(255)"/>

@@ -1,0 +1,23 @@
+#это файл с примерами настроек, все настройки используемые в данном проекте, должны быть здесь указаны.
+#Логины, пароли должны быть пустыми.
+
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto = none
+spring.liquibase.change-log=classpath:/db/changelog/changelog.xml
+
+server.port=8081
+server.servlet.context-path=/storageservice
+
+spring.liquibase.enabled=false
+spring.main.allow-bean-definition-overriding=true
+
+spring.datasource.tomcat.connection-properties=useUnicode=true;characterEncoding=utf-8;
+
+# Максимальный размер запроса в байтах (здесь приведен пример для 10 мегабайт)
+server.servlet.multipart.max-request-size=30MB
+
+#logging.level.root=DEBUG

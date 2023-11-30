@@ -12,5 +12,11 @@ spring.liquibase.change-log=classpath:/db/changelog/changelog.xml
 spring.liquibase.enabled=true
 spring.main.allow-bean-definition-overriding=true
 
+server.port=8080
+
+spring.liquibase.enabled=true
+spring.main.allow-bean-definition-overriding=true
+server.servlet.context-path=/catalogservice
+
 # Уровень логирования (INFO, DEBUG, WARN, ERROR)
 #logging.level.root=DEBUG
