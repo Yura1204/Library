@@ -18,5 +18,12 @@ spring.liquibase.enabled=true
 spring.main.allow-bean-definition-overriding=true
 server.servlet.context-path=/catalogservice
 
+spring.kafka.bootstrap-servers=localhost:9092
+topic.send-order=send-order-event
+spring.kafka.consumer.group-id=myGroupId
+spring.kafka.consumer.auto-offset-reset=earliest
+
+#logging.level.org.springframework.kafka=DEBUG
+
 # Уровень логирования (INFO, DEBUG, WARN, ERROR)
 #logging.level.root=DEBUG

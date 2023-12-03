@@ -15,6 +15,10 @@ server.servlet.context-path=/storageservice
 spring.liquibase.enabled=false
 spring.main.allow-bean-definition-overriding=true
 
+spring.kafka.bootstrap-servers=localhost:9092
+topic.send-order=send-order-event
+spring.kafka.producer.properties.max.request.size=200000000000
+
 spring.datasource.tomcat.connection-properties=useUnicode=true;characterEncoding=utf-8;
 
 # Максимальный размер запроса в байтах (здесь приведен пример для 10 мегабайт)
