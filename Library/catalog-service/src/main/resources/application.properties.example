@@ -4,23 +4,24 @@
 spring.datasource.url=
 spring.datasource.username=
 spring.datasource.password=
-spring.datasource.driverClassName=org.postgresql.Driver
+spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.hibernate.ddl-auto = none
+spring.jpa.hibernate.ddl-auto=none
 spring.liquibase.change-log=classpath:/db/changelog/changelog.xml
 
 spring.liquibase.enabled=true
 spring.main.allow-bean-definition-overriding=true
 
 server.port=8080
-
-spring.liquibase.enabled=true
-spring.main.allow-bean-definition-overriding=true
 server.servlet.context-path=/catalogservice
 
 spring.kafka.bootstrap-servers=localhost:9092
+
+spring.kafka.consumer.group-id-book=my-consumer-group-book
+spring.kafka.consumer.group-id-author=my-consumer-group-author
+
 topic.send-order=send-order-event
-spring.kafka.consumer.group-id=myGroupId
+
 spring.kafka.consumer.auto-offset-reset=earliest
 
 #logging.level.org.springframework.kafka=DEBUG

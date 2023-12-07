@@ -1,5 +1,6 @@
 package com.catalogservice.catalogservice.config;
 
+import com.catalogservice.catalogservice.model.CatalogAuthorInput;
 import com.catalogservice.catalogservice.model.CatalogBookInput;
 import com.catalogservice.catalogservice.service.AuthorService;
 import com.catalogservice.catalogservice.service.BookService;
@@ -17,13 +18,12 @@ public class KafkaConsumer {
         this.bookService = bookService;
     }
 
-    @KafkaListener(topics = "${topic.send-order}", groupId = "${spring.kafka.consumer.group-id}")
-    public void listen(ConsumerRecord<String, String> record) {
-        String bookInputJson = record.value();
+    @KafkaListener(topics = "${topic.send-order}", groupId = "${spring.kafka.consumer.group-id-book}")
+    public void listenBook(ConsumerRecord<String, String> record) {
+        String inputJson = record.value();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            CatalogBookInput catalogBookInput = objectMapper.readValue(bookInputJson, CatalogBookInput.class);
-
+            CatalogBookInput catalogBookInput = objectMapper.readValue(inputJson, CatalogBookInput.class);
             if (authorService.authorExists(catalogBookInput.getAuthorname())) {
                 bookService.addBookToDatabase(catalogBookInput);
             } else {
@@ -33,4 +33,22 @@ public class KafkaConsumer {
             System.out.println("Error processing BookInput from Kafka: " + e.getMessage());
         }
     }
+
+    @KafkaListener(topics = "${topic.send-order}", groupId = "${spring.kafka.consumer.group-id-author}")
+    public void listenAuthor(ConsumerRecord<String, String> record) {
+        String inputJson = record.value();
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            CatalogAuthorInput catalogAuthorInput = objectMapper.readValue(inputJson, CatalogAuthorInput.class);
+            if (authorService.authorExists(catalogAuthorInput.getAuthorname())) {
+                System.out.println("Error: An author with this name already exists.");
+            } else {
+                authorService.addAuthorToDatabase(catalogAuthorInput);
+            }
+        } catch (Exception e) {
+            System.out.println("Error processing AuthorInput from Kafka: " + e.getMessage());
+        }
+    }
+
+
 }

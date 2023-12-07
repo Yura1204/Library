@@ -72,6 +72,4 @@ public class BookProcessingController {
             return ResponseEntity.badRequest().body("Failed to process book input");
         }
     }
-
-
 }
