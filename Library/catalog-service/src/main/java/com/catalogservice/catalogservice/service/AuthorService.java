@@ -45,6 +45,19 @@ public class AuthorService {
                 .build();
     }
 
+    public boolean authorExists(String authorname) {
+        // Логика проверки наличия автора в базе данных
+        return authorRepository.existsByAuthorname(authorname);
+    }
+
+    public Author getAuthor(String authorname) {
+        List<Author> authors = authorRepository.findByAuthorname(authorname);
+        if(authors.isEmpty()) {
+            throw new RuntimeException("Error: Author not found - " + authorname);
+        }
+        return authors.get(0);
+    }
+
     private Author convertToEntity(AuthorDTO authorDTO) {
         return Author.builder()
                 .author_id(authorDTO.getAuthorId())

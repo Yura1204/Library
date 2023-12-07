@@ -23,6 +23,7 @@ public class Book {
     private String publisher;
     private int year_published;
     private String fileUrl;
+    private byte[] bookContent;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
