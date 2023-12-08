@@ -4,16 +4,21 @@
 spring.datasource.url=
 spring.datasource.username=
 spring.datasource.password=
-spring.datasource.driverClassName=org.postgresql.Driver
+spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.hibernate.ddl-auto = none
-spring.liquibase.change-log=classpath:/db/changelog/changelog.xml
+spring.jpa.hibernate.ddl-auto=none
+spring.liquibase.change-log=classpath:/db/changelog/storage-service/changelog.xml
 
 server.port=8081
 server.servlet.context-path=/storageservice
 
-spring.liquibase.enabled=false
+spring.liquibase.enabled=true
+liquibase.searchPath=db/changelog/storage-service
 spring.main.allow-bean-definition-overriding=true
+
+spring.kafka.bootstrap-servers=localhost:9092
+topic.send-order=send-order-event
+spring.kafka.producer.properties.max.request.size=200000000000
 
 spring.datasource.tomcat.connection-properties=useUnicode=true;characterEncoding=utf-8;
 

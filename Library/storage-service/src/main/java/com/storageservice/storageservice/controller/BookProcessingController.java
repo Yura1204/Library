@@ -1,11 +1,12 @@
 package com.storageservice.storageservice.controller;
 
+import ch.qos.logback.classic.Logger;
 import com.storageservice.storageservice.model.BookInput;
+import com.storageservice.storageservice.producer.Producer;
 import com.storageservice.storageservice.repository.BookInputRepository;
 import com.storageservice.storageservice.service.BookInputService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +19,19 @@ public class BookProcessingController {
     private BookInputRepository bookInputRepository;
     private final BookInputService bookInputService;
     private BookInput bookInput;
+    private final Producer producer;
 
-    public BookProcessingController(BookInputRepository bookInputRepository, BookInputService bookInputService, BookInput bookInput) {
+    public BookProcessingController(BookInputRepository bookInputRepository, BookInputService bookInputService, BookInput bookInput, Producer producer) {
         this.bookInputRepository = bookInputRepository;
         this.bookInputService = bookInputService;
         this.bookInput = bookInput;
+        this.producer = producer;
     }
 
     @Autowired
-    public BookProcessingController(BookInputService bookInputService) {
+    public BookProcessingController(BookInputService bookInputService, Producer producer) {
         this.bookInputService = bookInputService;
+        this.producer = producer;
     }
 
     @GetMapping("/add")
@@ -61,11 +65,11 @@ public class BookProcessingController {
         boolean success = bookInputService.processBookInput(bookInput);
 
         if (success) {
+            producer.sendBookInputEvent(bookInput);
+            System.out.println("Send order to kafka");
             return ResponseEntity.ok("Book input processed successfully");
         } else {
             return ResponseEntity.badRequest().body("Failed to process book input");
         }
     }
-
-
 }

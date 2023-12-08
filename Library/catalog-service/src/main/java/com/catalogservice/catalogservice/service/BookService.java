@@ -1,7 +1,9 @@
 package com.catalogservice.catalogservice.service;
 
 import com.catalogservice.catalogservice.dto.BookDTO;
+import com.catalogservice.catalogservice.model.Author;
 import com.catalogservice.catalogservice.model.Book;
+import com.catalogservice.catalogservice.model.CatalogBookInput;
 import com.catalogservice.catalogservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class BookService {
     private final BookRepository bookRepository;
+    private final AuthorService authorService;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, AuthorService authorService) {
         this.bookRepository = bookRepository;
+        this.authorService = authorService;
     }
 
     public List<BookDTO> getAllBooks() {
@@ -35,6 +39,22 @@ public class BookService {
         return books.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public void addBookToDatabase(CatalogBookInput catalogBookInput) {
+        // Логика добавления книги в базу данных
+        Author author = authorService.getAuthor(catalogBookInput.getAuthorname());
+        Long authorId = author.getAuthor_id();
+        Book book = new Book();
+        book.setTitle(catalogBookInput.getTitle());
+        book.setDescription(catalogBookInput.getDescription());
+        book.setGenre(catalogBookInput.getGenre());
+        book.setPublisher(catalogBookInput.getPublisher());
+        book.setYear_published(catalogBookInput.getYearPublished());
+        book.setBookContent(catalogBookInput.getBookContent());
+        book.setAuthor_id(authorId);
+        bookRepository.save(book);
+        System.out.println("Book added to the database.");
     }
 
     // Методы преобразования с использованием @Builder

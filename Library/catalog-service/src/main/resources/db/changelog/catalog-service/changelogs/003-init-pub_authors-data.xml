@@ -6,7 +6,7 @@
 
     <changeSet id="004-init-pub_authors-data" author="liquibase">
         <insert tableName="pub_authors">
-            <column name="authorname" value="Джордж Оруэл"/>
+            <column name="authorname" value="Джордж Оруэлл"/>
             <column name="biography" value="Британский писатель, автор 'Скотного двора' и '1984'."/>
         </insert>
         <insert tableName="pub_authors">

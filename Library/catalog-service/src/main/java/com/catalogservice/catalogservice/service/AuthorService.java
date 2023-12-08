@@ -2,6 +2,7 @@ package com.catalogservice.catalogservice.service;
 
 import com.catalogservice.catalogservice.dto.AuthorDTO;
 import com.catalogservice.catalogservice.model.Author;
+import com.catalogservice.catalogservice.model.CatalogAuthorInput;
 import com.catalogservice.catalogservice.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,27 @@ public class AuthorService {
                 .authorname(author.getAuthorname())
                 .biography(author.getBiography())
                 .build();
+    }
+
+    public boolean authorExists(String authorname) {
+        // Логика проверки наличия автора в базе данных
+        return authorRepository.existsByAuthorname(authorname);
+    }
+
+    public Author getAuthor(String authorname) {
+        List<Author> authors = authorRepository.findByAuthorname(authorname);
+        if(authors.isEmpty()) {
+            throw new RuntimeException("Error: Author not found - " + authorname);
+        }
+        return authors.get(0);
+    }
+
+    public void addAuthorToDatabase(CatalogAuthorInput catalogAuthorInput) {
+        Author author = new Author();
+        author.setAuthorname(catalogAuthorInput.getAuthorname());
+        author.setBiography(catalogAuthorInput.getBiography());
+        authorRepository.save(author);
+        System.out.println("Author added to the database");
     }
 
     private Author convertToEntity(AuthorDTO authorDTO) {
