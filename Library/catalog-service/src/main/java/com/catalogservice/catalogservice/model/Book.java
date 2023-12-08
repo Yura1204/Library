@@ -28,4 +28,8 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author_id;
+
+    public Long setAuthor_id(Long authorId) {
+        return authorId;
+    }
 }

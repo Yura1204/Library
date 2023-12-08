@@ -44,6 +44,7 @@ public class BookService {
     public void addBookToDatabase(CatalogBookInput catalogBookInput) {
         // Логика добавления книги в базу данных
         Author author = authorService.getAuthor(catalogBookInput.getAuthorname());
+        Long authorId = author.getAuthor_id();
         Book book = new Book();
         book.setTitle(catalogBookInput.getTitle());
         book.setDescription(catalogBookInput.getDescription());
@@ -51,7 +52,7 @@ public class BookService {
         book.setPublisher(catalogBookInput.getPublisher());
         book.setYear_published(catalogBookInput.getYearPublished());
         book.setBookContent(catalogBookInput.getBookContent());
-        book.setAuthor_id(author);
+        book.setAuthor_id(authorId);
         bookRepository.save(book);
         System.out.println("Book added to the database.");
     }
