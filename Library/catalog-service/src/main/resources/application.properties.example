@@ -7,9 +7,10 @@ spring.datasource.password=
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=none
-spring.liquibase.change-log=classpath:/db/changelog/changelog.xml
+spring.liquibase.change-log=classpath:/db/changelog/catalog-service/changelog.xml
 
 spring.liquibase.enabled=true
+liquibase.searchPath=db/changelog/catalog-service
 spring.main.allow-bean-definition-overriding=true
 
 server.port=8080
