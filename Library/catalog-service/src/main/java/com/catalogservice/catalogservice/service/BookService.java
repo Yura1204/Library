@@ -5,6 +5,7 @@ import com.catalogservice.catalogservice.model.Author;
 import com.catalogservice.catalogservice.model.Book;
 import com.catalogservice.catalogservice.model.CatalogBookInput;
 import com.catalogservice.catalogservice.repository.BookRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,21 +42,29 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void addBookToDatabase(CatalogBookInput catalogBookInput) {
         // Логика добавления книги в базу данных
         Author author = authorService.getAuthor(catalogBookInput.getAuthorname());
-        Long authorId = author.getAuthor_id();
-        Book book = new Book();
-        book.setTitle(catalogBookInput.getTitle());
-        book.setDescription(catalogBookInput.getDescription());
-        book.setGenre(catalogBookInput.getGenre());
-        book.setPublisher(catalogBookInput.getPublisher());
-        book.setYear_published(catalogBookInput.getYearPublished());
-        book.setBookContent(catalogBookInput.getBookContent());
-        book.setAuthor_id(authorId);
-        bookRepository.save(book);
-        System.out.println("Book added to the database.");
+
+        // Проверка, существует ли автор в базе данных
+        if (author != null) {
+            Book book = new Book();
+            book.setTitle(catalogBookInput.getTitle());
+            book.setDescription(catalogBookInput.getDescription());
+            book.setGenre(catalogBookInput.getGenre());
+            book.setPublisher(catalogBookInput.getPublisher());
+            book.setYear_published(catalogBookInput.getYearPublished());
+            book.setBookContent(catalogBookInput.getBookContent());
+            book.setAuthor(author);
+            bookRepository.save(book);
+            System.out.println("Book added to the database.");
+        } else {
+            // Обработка случая, когда автор не найден
+            System.out.println("Author not found.");
+        }
     }
+
 
     public byte[] getFileContent(Long bookId) {
         Book book = bookRepository.findById(bookId)

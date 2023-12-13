@@ -1,7 +1,7 @@
 #это файл с примерами настроек, все настройки используемые в данном проекте, должны быть здесь указаны.
 #Логины, пароли должны быть пустыми.
 
-spring.datasource.url=
+spring.datasource.url=jdbc:postgresql://localhost:5432/name
 spring.datasource.username=
 spring.datasource.password=
 spring.datasource.driver-class-name=org.postgresql.Driver
@@ -17,6 +17,11 @@ server.port=8080
 server.servlet.context-path=/catalogservice
 
 spring.kafka.bootstrap-servers=localhost:9092
+
+# Включить логирование SQL-запросов Hibernate
+#spring.jpa.show-sql=true
+#logging.level.org.hibernate.SQL=DEBUG
+#logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
 
 spring.kafka.consumer.group-id-book=my-consumer-group-book
 spring.kafka.consumer.group-id-author=my-consumer-group-author

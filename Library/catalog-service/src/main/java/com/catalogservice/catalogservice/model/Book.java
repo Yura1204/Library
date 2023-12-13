@@ -25,11 +25,11 @@ public class Book {
     private String fileUrl;
     private byte[] bookContent;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author_id;
 
-    public Long setAuthor_id(Long authorId) {
-        return authorId;
+    public void setAuthor(Author author) {
+        this.author_id = author;
     }
 }
