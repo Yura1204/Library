@@ -1,13 +1,17 @@
 package com.catalogservice.catalogservice.controller;
 
 import com.catalogservice.catalogservice.dto.BookDTO;
-import com.catalogservice.catalogservice.model.Book;
 import com.catalogservice.catalogservice.service.BookService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -41,5 +45,19 @@ public class BookController {
     public ResponseEntity<List<BookDTO>> searchBooksByTitle(@PathVariable String title) {
         List<BookDTO> books = bookService.searchBooksByTitle(title);
         return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    @GetMapping("/download/{bookId}")
+    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long bookId) {
+        // Получаем содержимое файла из сервиса
+        byte[] fileContent = bookService.getFileContent(bookId);
+
+        // Создаем ресурс для скачивания файла
+        ByteArrayResource resource = new ByteArrayResource(fileContent);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + "book.fb2")
+                .contentType(MediaType.parseMediaType("application/fb2+xml"))
+                .body(resource);
     }
 }

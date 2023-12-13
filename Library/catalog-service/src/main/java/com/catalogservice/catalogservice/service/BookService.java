@@ -57,6 +57,14 @@ public class BookService {
         System.out.println("Book added to the database.");
     }
 
+    public byte[] getFileContent(Long bookId) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
+
+        // Получаем массив байтов из bookContent
+        return book.getBookContent();
+    }
+
     // Методы преобразования с использованием @Builder
     public BookDTO convertToDTO(Book book) {
         return BookDTO.builder()
