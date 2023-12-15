@@ -18,6 +18,7 @@ spring.main.allow-bean-definition-overriding=true
 
 spring.kafka.bootstrap-servers=localhost:9092
 topic.send-order=send-order-event
+topic.delete-order=send-delete-event
 spring.kafka.producer.properties.max.request.size=200000000000
 
 spring.datasource.tomcat.connection-properties=useUnicode=true;characterEncoding=utf-8;

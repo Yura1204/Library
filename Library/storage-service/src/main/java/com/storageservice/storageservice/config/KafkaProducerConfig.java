@@ -50,4 +50,3 @@ public class KafkaProducerConfig {
         return new KafkaTemplate<>(authorInputProducerFactory());
     }
 }
-
