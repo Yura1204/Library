@@ -1,6 +1,5 @@
 package com.storageservice.storageservice.controller;
 
-import ch.qos.logback.classic.Logger;
 import com.storageservice.storageservice.model.BookInput;
 import com.storageservice.storageservice.producer.Producer;
 import com.storageservice.storageservice.repository.BookInputRepository;
@@ -70,6 +69,17 @@ public class BookProcessingController {
             return ResponseEntity.ok("Book input processed successfully");
         } else {
             return ResponseEntity.badRequest().body("Failed to process book input");
+        }
+    }
+
+    @DeleteMapping("/deleteBookById/{id}")
+    public ResponseEntity<String> deleteBookById(@PathVariable Long id) {
+        boolean success = bookInputService.deleteBookById(id);
+
+        if (success) {
+            return ResponseEntity.ok("Book deleted successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Failed to delete book");
         }
     }
 }
