@@ -65,6 +65,22 @@ public class BookService {
         }
     }
 
+    // Метод для удаления книги по имени
+    public void deleteBookByName(String bookName) {
+        List<Book> booksToDelete = bookRepository.findByTitleContaining(bookName);
+
+        if (!booksToDelete.isEmpty()) {
+            // Если у вас есть несколько книг с тем же названием, выберите нужную логику удаления
+            // Например, удалите первую книгу из списка:
+            Book bookToDelete = booksToDelete.get(0);
+            bookRepository.delete(bookToDelete);
+            System.out.println("Book deleted by name: " + bookName);
+        } else {
+            System.out.println("Book not found by name: " + bookName);
+        }
+    }
+
+
 
     public byte[] getFileContent(Long bookId) {
         Book book = bookRepository.findById(bookId)

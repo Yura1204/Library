@@ -9,6 +9,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class KafkaConsumer {
     private final AuthorService authorService;
@@ -47,6 +49,20 @@ public class KafkaConsumer {
             }
         } catch (Exception e) {
             System.out.println("Error processing AuthorInput from Kafka: " + e.getMessage());
+        }
+    }
+
+    @KafkaListener(topics = "${topic.delete-order}", groupId = "${spring.kafka.consumer.group-id-delete-book}")
+    public void listenDeleteEvent(ConsumerRecord<String, String> record) {
+        try {
+            String inputJson = record.value();
+            ObjectMapper objectMapper = new ObjectMapper();
+            CatalogBookInput deleteEvent = objectMapper.readValue(inputJson, CatalogBookInput.class);
+
+            bookService.deleteBookByName(deleteEvent.getTitle());
+            System.out.println("Book deleted");
+        } catch (Exception e) {
+            System.out.println("Error processing DeleteEvent from Kafka: " + e.getMessage());
         }
     }
 
