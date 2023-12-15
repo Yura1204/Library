@@ -34,4 +34,9 @@ public class Producer {
         kafkaMessagingService.sendDeletedBook(bookInput);
         log.info("Send book deletion event from producer: {}", bookInput);
     }
+
+    public void sendAuthorDeletionEvent(AuthorInput authorInput) throws JsonProcessingException {
+        kafkaMessagingService.sendDeletedAuthor(authorInput);
+        log.info("Send author deletion event from producer: {}", authorInput);
+    }
 }

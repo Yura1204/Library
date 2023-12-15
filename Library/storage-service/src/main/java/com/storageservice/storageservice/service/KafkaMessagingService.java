@@ -36,4 +36,8 @@ public class KafkaMessagingService {
     public void sendDeletedBook(BookInput deletedBook) {
         bookInputKafkaTemplate.send(deleteClientTopic, String.valueOf(deletedBook.getBook_input_id()), deletedBook);
     }
+
+    public void sendDeletedAuthor(AuthorInput deletedAuthor) {
+        authorInputKafkaTemplate.send(deleteClientTopic, String.valueOf(deletedAuthor.getAuthor_id()), deletedAuthor);
+    }
 }

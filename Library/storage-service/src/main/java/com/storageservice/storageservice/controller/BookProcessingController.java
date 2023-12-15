@@ -73,8 +73,8 @@ public class BookProcessingController {
         }
     }
 
-    @DeleteMapping("/deleteBookById")
-    public ResponseEntity<String> deleteBookById(
+    @DeleteMapping("/deleteBook")
+    public ResponseEntity<String> deleteBook(
             @RequestParam Long id,
             @RequestParam("title") String title,
             @RequestParam("authorname") String authorname,
