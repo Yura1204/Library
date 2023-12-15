@@ -4,9 +4,6 @@ import com.storageservice.storageservice.model.BookInput;
 import com.storageservice.storageservice.repository.BookInputRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @Service
 public class BookInputService {
@@ -37,6 +34,17 @@ public class BookInputService {
         } catch (Exception e) {
             // Логгирование ошибки
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteBookById(Long id) {
+        try {
+            bookInputRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            // Обработка исключения, если удаление не удалось
+            e.printStackTrace(); // Лучше логировать ошибку
             return false;
         }
     }

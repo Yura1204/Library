@@ -25,8 +25,11 @@ spring.kafka.bootstrap-servers=localhost:9092
 
 spring.kafka.consumer.group-id-book=my-consumer-group-book
 spring.kafka.consumer.group-id-author=my-consumer-group-author
+spring.kafka.consumer.group-id-delete-book=my-consumer-group-book
+spring.kafka.consumer.group-id-delete-author=my-consumer-group-author
 
 topic.send-order=send-order-event
+topic.delete-order=send-delete-event
 
 spring.kafka.consumer.auto-offset-reset=earliest
 

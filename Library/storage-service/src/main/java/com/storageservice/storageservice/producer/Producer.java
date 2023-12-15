@@ -29,4 +29,14 @@ public class Producer {
         log.info("Send order from producer {}", authorInput);
         return authorInput;
     }
+
+    public void sendBookDeletionEvent(BookInput bookInput) throws JsonProcessingException {
+        kafkaMessagingService.sendDeletedBook(bookInput);
+        log.info("Send book deletion event from producer: {}", bookInput);
+    }
+
+    public void sendAuthorDeletionEvent(AuthorInput authorInput) throws JsonProcessingException {
+        kafkaMessagingService.sendDeletedAuthor(authorInput);
+        log.info("Send author deletion event from producer: {}", authorInput);
+    }
 }

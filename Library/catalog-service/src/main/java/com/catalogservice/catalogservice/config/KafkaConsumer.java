@@ -9,6 +9,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class KafkaConsumer {
     private final AuthorService authorService;
@@ -50,5 +52,32 @@ public class KafkaConsumer {
         }
     }
 
+    @KafkaListener(topics = "${topic.delete-order}", groupId = "${spring.kafka.consumer.group-id-delete-book}")
+    public void listenDeleteBookEvent(ConsumerRecord<String, String> record) {
+        try {
+            String inputJson = record.value();
+            ObjectMapper objectMapper = new ObjectMapper();
+            CatalogBookInput deleteEvent = objectMapper.readValue(inputJson, CatalogBookInput.class);
+
+            bookService.deleteBookByName(deleteEvent.getTitle());
+            System.out.println("Book deleted");
+        } catch (Exception e) {
+            System.out.println("Error processing DeleteEvent from Kafka: " + e.getMessage());
+        }
+    }
+
+    @KafkaListener(topics = "${topic.delete-order}", groupId = "${spring.kafka.consumer.group-id-delete-author}")
+    public void listenDeleteAuthorEvent(ConsumerRecord<String, String> record) {
+        try {
+            String inputJson = record.value();
+            ObjectMapper objectMapper = new ObjectMapper();
+            CatalogAuthorInput deleteEvent = objectMapper.readValue(inputJson, CatalogAuthorInput.class);
+
+            authorService.deleteAuthorByName(deleteEvent.getAuthorname());
+            System.out.println("Author deleted");
+        } catch (Exception e) {
+            System.out.println("Error processing DeleteEvent from Kafka: " + e.getMessage());
+        }
+    }
 
 }

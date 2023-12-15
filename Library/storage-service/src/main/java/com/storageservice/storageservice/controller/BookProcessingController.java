@@ -1,6 +1,6 @@
 package com.storageservice.storageservice.controller;
 
-import ch.qos.logback.classic.Logger;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.storageservice.storageservice.model.BookInput;
 import com.storageservice.storageservice.producer.Producer;
 import com.storageservice.storageservice.repository.BookInputRepository;
@@ -72,4 +72,38 @@ public class BookProcessingController {
             return ResponseEntity.badRequest().body("Failed to process book input");
         }
     }
+
+    @DeleteMapping("/deleteBook")
+    public ResponseEntity<String> deleteBook(
+            @RequestParam Long id,
+            @RequestParam("title") String title,
+            @RequestParam("authorname") String authorname,
+            @RequestParam("description") String description,
+            @RequestParam("genre") String genre,
+            @RequestParam("publisher") String publisher,
+            @RequestParam("year_published") int year_published
+    ) throws JsonProcessingException {
+        // Попытаться удалить книгу
+        boolean success = bookInputService.deleteBookById(id);
+
+        if (success) {
+            // Создать объект BookInput с информацией об удаленной книге
+            BookInput deletedBook = new BookInput();
+            deletedBook.setBook_input_id(id);
+            deletedBook.setTitle(title);
+            deletedBook.setAuthorname(authorname);
+            deletedBook.setDescription(description);
+            deletedBook.setGenre(genre);
+            deletedBook.setPublisher(publisher);
+            deletedBook.setYearPublished(year_published);
+
+            // Отправить информацию об удаленной книге в Kafka
+            producer.sendBookDeletionEvent(deletedBook);
+            System.out.println("Send a delete order to kafka");
+            return ResponseEntity.ok("Book deleted successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Failed to delete book");
+        }
+    }
+
 }

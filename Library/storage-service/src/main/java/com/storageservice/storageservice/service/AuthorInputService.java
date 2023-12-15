@@ -28,4 +28,13 @@ public class AuthorInputService {
         }
     }
 
+    public boolean deleteAuthorById(Long id) {
+        try {
+            authorInputRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

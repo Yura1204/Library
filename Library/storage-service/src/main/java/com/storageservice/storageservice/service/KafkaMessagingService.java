@@ -17,6 +17,9 @@ public class KafkaMessagingService {
     @Value("${topic.send-order}")
     private String sendClientTopic;
 
+    @Value("${topic.delete-order}")
+    private String deleteClientTopic;
+
     private final KafkaTemplate<String, BookInput> bookInputKafkaTemplate;
     private final KafkaTemplate<String, AuthorInput> authorInputKafkaTemplate;
 
@@ -28,5 +31,13 @@ public class KafkaMessagingService {
     public void sendAuthorInput(AuthorInput authorInput) throws JsonProcessingException {
         String serializedData = objectMapper.writeValueAsString(authorInput);
         authorInputKafkaTemplate.send(sendClientTopic, String.valueOf(authorInput.getAuthor_id()), authorInput);
+    }
+
+    public void sendDeletedBook(BookInput deletedBook) {
+        bookInputKafkaTemplate.send(deleteClientTopic, String.valueOf(deletedBook.getBook_input_id()), deletedBook);
+    }
+
+    public void sendDeletedAuthor(AuthorInput deletedAuthor) {
+        authorInputKafkaTemplate.send(deleteClientTopic, String.valueOf(deletedAuthor.getAuthor_id()), deletedAuthor);
     }
 }
