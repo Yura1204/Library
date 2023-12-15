@@ -70,8 +70,6 @@ public class BookService {
         List<Book> booksToDelete = bookRepository.findByTitleContaining(bookName);
 
         if (!booksToDelete.isEmpty()) {
-            // Если у вас есть несколько книг с тем же названием, выберите нужную логику удаления
-            // Например, удалите первую книгу из списка:
             Book bookToDelete = booksToDelete.get(0);
             bookRepository.delete(bookToDelete);
             System.out.println("Book deleted by name: " + bookName);

@@ -53,7 +53,7 @@ public class KafkaConsumer {
     }
 
     @KafkaListener(topics = "${topic.delete-order}", groupId = "${spring.kafka.consumer.group-id-delete-book}")
-    public void listenDeleteEvent(ConsumerRecord<String, String> record) {
+    public void listenDeleteBookEvent(ConsumerRecord<String, String> record) {
         try {
             String inputJson = record.value();
             ObjectMapper objectMapper = new ObjectMapper();
@@ -66,5 +66,18 @@ public class KafkaConsumer {
         }
     }
 
+    @KafkaListener(topics = "${topic.delete-order}", groupId = "${spring.kafka.consumer.group-id-delete-author}")
+    public void listenDeleteAuthorEvent(ConsumerRecord<String, String> record) {
+        try {
+            String inputJson = record.value();
+            ObjectMapper objectMapper = new ObjectMapper();
+            CatalogAuthorInput deleteEvent = objectMapper.readValue(inputJson, CatalogAuthorInput.class);
+
+            authorService.deleteAuthorByName(deleteEvent.getAuthorname());
+            System.out.println("Author deleted");
+        } catch (Exception e) {
+            System.out.println("Error processing DeleteEvent from Kafka: " + e.getMessage());
+        }
+    }
 
 }

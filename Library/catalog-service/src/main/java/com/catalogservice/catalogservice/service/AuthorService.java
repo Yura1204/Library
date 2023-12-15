@@ -67,6 +67,18 @@ public class AuthorService {
         System.out.println("Author added to the database");
     }
 
+    public void deleteAuthorByName(String authorname) {
+        List<Author> authorsToDelete = authorRepository.findByAuthorname(authorname);
+
+        if (!authorsToDelete.isEmpty()) {
+            Author authorToDelete = authorsToDelete.get(0);
+            authorRepository.delete(authorToDelete);
+            System.out.println("Author deleted by name: " + authorname);
+        } else {
+            System.out.println("Author not found by name: " + authorname);
+        }
+    }
+
     private Author convertToEntity(AuthorDTO authorDTO) {
         return Author.builder()
                 .author_id(authorDTO.getAuthorId())
