@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="catalog-service" />
         <module name="storage-service" />
+        <module name="security-service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="catalog-service" options="-parameters" />
+      <module name="security-service" options="-parameters" />
       <module name="storage-service" options="-parameters" />
     </option>
   </component>
