@@ -4,7 +4,9 @@ spring.datasource.password=
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=none
-spring.liquibase.change-log=classpath:/db/changelog/catalog-service/changelog.xml
+spring.liquibase.change-log=classpath:/db/changelog/security-service/changelog.xml
 
 server.port=8082
 server.servlet.context-path=/securityservice
+
+logging.level.org.springframework.security=DEBUG
