@@ -28,7 +28,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users/**", "/api/users/register").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users/register").permitAll()
+                        .requestMatchers("/api/users/welcome").hasRole("ADMIN")
                         .requestMatchers("api/v1/apps/**").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
