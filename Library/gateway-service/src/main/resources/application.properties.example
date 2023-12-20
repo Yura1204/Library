@@ -5,7 +5,6 @@ app.eureka-server=localhost
 eureka.instance.prefer-ip-address=true
 
 server.port=8083
-server.servlet.context-path=/gateway
 
 spring.cloud.gateway.routes[0].id=CATALOG-SERVICE
 spring.cloud.gateway.routes[0].uri=lb://CATALOG-SERVICE/
