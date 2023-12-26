@@ -93,11 +93,13 @@ public class BookService {
         return BookDTO.builder()
                 .id(book.getBook_id())
                 .title(book.getTitle())
+                .authorName(book.getAuthor_id().getAuthorname())
                 .description(book.getDescription())
                 .genre(book.getGenre())
                 .publisher(book.getPublisher())
                 .year_published(book.getYear_published())
                 .fileUrl(book.getFileUrl())
+                .author_id(book.getAuthor_id().getAuthor_id())
                 .build();
     }
 

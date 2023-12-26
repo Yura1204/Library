@@ -1,5 +1,6 @@
 package com.catalogservice.catalogservice.dto;
 
+import com.catalogservice.catalogservice.model.Author;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,5 @@ public class BookDTO {
     private String publisher;
     private int year_published;
     private String fileUrl;
+    private Long author_id;
 }
