@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) throws Exception {
-        return http.csrf(Customizer.withDefaults())
+        return http.csrf().disable()
                 .authorizeExchange(auth -> auth
                         .pathMatchers("/api/users/register", "/api/users/welcome").permitAll()
                         .pathMatchers("/catalogservice/api/books/download/**").authenticated()
