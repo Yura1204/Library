@@ -17,7 +17,7 @@ public class SecurityConfig {
                         .pathMatchers("/api/users/register", "/api/users/welcome").permitAll()
                         .pathMatchers("/catalogservice/api/books/download/**").authenticated()
                         .pathMatchers("/catalogservice/**").permitAll()
-                        .pathMatchers("/storageservice/").authenticated()
+                        .pathMatchers("/storageservice/**").authenticated()
                 )
                 .build();
     }
