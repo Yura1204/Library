@@ -4,6 +4,14 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 app.eureka-server=localhost
 eureka.instance.prefer-ip-address=true
 
+spring.datasource.url=jdbc:postgresql://localhost:5432/library_security_service
+spring.datasource.username=postgres
+spring.datasource.password=1234
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=none
+spring.liquibase.change-log=classpath:/db/changelog/catalog-service/changelog.xml
+
 server.port=8083
 
 spring.cloud.gateway.routes[0].id=CATALOG-SERVICE
@@ -19,3 +27,4 @@ spring.cloud.gateway.routes[2].uri=lb://SECURITY-SERVICE/
 spring.cloud.gateway.routes[2].predicates[0]=Path=/securityservice/**
 
 logging.level.org.springframework.cloud.gateway=DEBUG
+logging.level.org.springframework.security=DEBUG
