@@ -1,6 +1,3 @@
-#это файл с примерами настроек, все настройки используемые в данном проекте, должны быть здесь указаны.
-#Логины, пароли должны быть пустыми.
-
 spring.application.name=catalog-service
 
 spring.datasource.url=jdbc:postgresql://localhost:5432/library_catalog_service
@@ -18,7 +15,7 @@ spring.liquibase.enabled=true
 liquibase.searchPath=db/changelog/catalog-service
 spring.main.allow-bean-definition-overriding=true
 
-server.port=8080
+server.port=8081
 server.servlet.context-path=/catalogservice
 
 spring.kafka.bootstrap-servers=localhost:9092

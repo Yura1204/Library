@@ -12,7 +12,7 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=none
 spring.liquibase.change-log=classpath:/db/changelog/catalog-service/changelog.xml
 
-server.port=8083
+server.port=8080
 
 spring.cloud.gateway.routes[0].id=CATALOG-SERVICE
 spring.cloud.gateway.routes[0].uri=lb://CATALOG-SERVICE/
@@ -22,9 +22,6 @@ spring.cloud.gateway.routes[1].id=STORAGE-SERVICE
 spring.cloud.gateway.routes[1].uri=lb://STORAGE-SERVICE/
 spring.cloud.gateway.routes[1].predicates[0]=Path=/storageservice/**
 
-spring.cloud.gateway.routes[2].id=SECURITY-SERVICE
-spring.cloud.gateway.routes[2].uri=lb://SECURITY-SERVICE/
-spring.cloud.gateway.routes[2].predicates[0]=Path=/securityservice/**
-
+logging.level.org.springframework=DEBUG
 logging.level.org.springframework.cloud.gateway=DEBUG
 logging.level.org.springframework.security=DEBUG
