@@ -1,8 +1,9 @@
-package com.securityservice.securityservice.controller;
+package com.gatewayservice.gatewayservice.controller;
 
-import com.securityservice.securityservice.model.User;
-import com.securityservice.securityservice.service.UserService;
+import com.gatewayservice.gatewayservice.model.User;
+import com.gatewayservice.gatewayservice.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private UserService userService;
     @GetMapping("/welcome")
+    @Secured({})
     public String welcome(){
         return "Welcome to the unprotected page";
     }

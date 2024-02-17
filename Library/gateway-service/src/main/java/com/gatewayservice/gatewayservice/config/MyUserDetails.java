@@ -1,14 +1,15 @@
-package com.securityservice.securityservice.config;
+package com.gatewayservice.gatewayservice.config;
 
-import com.securityservice.securityservice.model.User;
+import com.gatewayservice.gatewayservice.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class MyUserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class MyUserDetails implements UserDetails {
     private User user;
     public MyUserDetails(User user) {
         this.user = user;

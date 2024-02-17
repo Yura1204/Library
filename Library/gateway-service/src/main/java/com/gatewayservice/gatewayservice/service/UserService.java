@@ -1,7 +1,7 @@
-package com.securityservice.securityservice.service;
+package com.gatewayservice.gatewayservice.service;
 
-import com.securityservice.securityservice.model.User;
-import com.securityservice.securityservice.repository.UserRepository;
+import com.gatewayservice.gatewayservice.model.User;
+import com.gatewayservice.gatewayservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

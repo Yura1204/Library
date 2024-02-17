@@ -1,4 +1,4 @@
-package com.securityservice.securityservice.model;
+package com.gatewayservice.gatewayservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
