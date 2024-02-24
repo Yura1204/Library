@@ -31,7 +31,7 @@ public class SecurityConfig {
         return http.csrf().disable()
                 .authorizeExchange(auth -> auth
                         .pathMatchers("/api/users/register", "/api/users/welcome").permitAll()
-                        .pathMatchers("/catalogservice/api/books/download/**").authenticated()
+                        .pathMatchers("/catalogservice/api/books/download/**").permitAll()
                         .pathMatchers("/catalogservice/**").permitAll()
                         .pathMatchers("/storageservice/**").hasRole("ADMIN")
                 )
