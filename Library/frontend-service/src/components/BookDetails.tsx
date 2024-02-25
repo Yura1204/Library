@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 interface Book {
   id: number;
@@ -34,7 +34,7 @@ const BookDetails: React.FC = () => {
   return (
     <div>
       <h1>{book.title}</h1>
-      <p>Автор: <a href={`/author/${book.author_id}`}>{book.authorName}</a></p>
+      <p>Автор: <Link to={`/author/${book.author_id}`}>{book.authorName}</Link></p>
       <p>Описание: {book.description}</p>
       <p>Жанр: {book.genre}</p>
       <p>Издатель: {book.publisher}</p>
