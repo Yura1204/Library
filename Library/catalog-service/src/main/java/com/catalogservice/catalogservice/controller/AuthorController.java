@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/authors")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthorController {
     private final AuthorService authorService;
 
@@ -26,7 +27,7 @@ public class AuthorController {
         return new ResponseEntity<>(authors, HttpStatus.OK);
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/author/{authorId}")
     public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long authorId) {
         AuthorDTO author = authorService.getAuthorById(authorId);
         if (author != null) {

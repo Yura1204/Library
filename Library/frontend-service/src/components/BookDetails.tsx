@@ -10,6 +10,7 @@ interface Book {
   genre: string;
   publisher: string;
   year_published: number;
+  author_id: number;
 }
 
 const BookDetails: React.FC = () => {
@@ -33,7 +34,7 @@ const BookDetails: React.FC = () => {
   return (
     <div>
       <h1>{book.title}</h1>
-      <p>Автор: {book.authorName}</p>
+      <p>Автор: <a href={`/author/${book.author_id}`}>{book.authorName}</a></p>
       <p>Описание: {book.description}</p>
       <p>Жанр: {book.genre}</p>
       <p>Издатель: {book.publisher}</p>
