@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/api/books")
-@CrossOrigin(origins = "http://localhost:5173")
 public class BookProcessingController {
     private BookInputRepository bookInputRepository;
     private final BookInputService bookInputService;
