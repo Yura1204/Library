@@ -1,0 +1,41 @@
+.bookList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .bookItem {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.3s ease-in-out; /* Добавляем плавный переход для анимации */
+  }
+  
+  .bookItem:hover {
+    transform: scale(1.05); /* Увеличиваем размер при наведении */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Добавляем тень при наведении */
+  }
+  
+  .bookTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    animation: titleAnimation 1s ease-in-out infinite alternate; /* Добавляем анимацию для заголовка */
+  }
+  
+  .bookAuthor {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  @keyframes titleAnimation {
+    0% {
+      transform: translateY(0); /* Начальное положение */
+    }
+    100% {
+      transform: translateY(-5px); /* Конечное положение */
+    }
+  }

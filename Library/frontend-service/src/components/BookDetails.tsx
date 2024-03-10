@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import styles from './BookDetails.module.css';
 
 interface Book {
   id: number;
@@ -32,16 +33,22 @@ const BookDetails: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>{book.title}</h1>
-      <p>Автор: <Link to={`/author/${book.author_id}`}>{book.authorName}</Link></p>
-      <p>Описание: {book.description}</p>
-      <p>Жанр: {book.genre}</p>
-      <p>Издатель: {book.publisher}</p>
-      <p>Год публикации: {book.year_published}</p>
-
-      <a href={`http://localhost:8080/catalogservice/api/books/download/${id}`} target="_blank" rel="noopener noreferrer">
-        <button disabled={loading}>
+    <div className={styles.bookDetails}>
+      <h1 className={styles.bookTitle}>{book.title}</h1>
+      <p className={styles.bookInfo}>
+        Автор: <Link to={`/author/${book.author_id}`}>{book.authorName}</Link>
+      </p>
+      <p className={styles.bookInfo}>Описание: {book.description}</p>
+      <p className={styles.bookInfo}>Жанр: {book.genre}</p>
+      <p className={styles.bookInfo}>Издатель: {book.publisher}</p>
+      <p className={styles.bookInfo}>Год публикации: {book.year_published}</p>
+  
+      <a
+        href={`http://localhost:8080/catalogservice/api/books/download/${id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button className={styles.downloadButton} disabled={loading}>
           {loading ? 'Загрузка...' : 'Скачать книгу'}
         </button>
       </a>
