@@ -22,20 +22,10 @@
   .bookTitle {
     font-size: 18px;
     font-weight: bold;
-    color: #333;
-    animation: titleAnimation 1s ease-in-out infinite alternate; /* Добавляем анимацию для заголовка */
+    color: #d1cfcf;
   }
   
   .bookAuthor {
     font-size: 14px;
     color: #666;
-  }
-  
-  @keyframes titleAnimation {
-    0% {
-      transform: translateY(0); /* Начальное положение */
-    }
-    100% {
-      transform: translateY(-5px); /* Конечное положение */
-    }
   }

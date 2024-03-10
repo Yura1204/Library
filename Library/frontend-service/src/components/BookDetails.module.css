@@ -11,7 +11,7 @@
   .bookTitle {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: #c0c0c0;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -19,6 +19,7 @@
   .bookInfo {
     margin-bottom: 10px;
     line-height: 1.5;
+    color: #c0c0c0;
   }
   
   .bookInfo a {
