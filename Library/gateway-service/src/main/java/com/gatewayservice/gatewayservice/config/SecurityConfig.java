@@ -14,13 +14,16 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.server.DefaultServerRedirectStrategy;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.ServerRedirectStrategy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,12 +44,17 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().configurationSource(corsConfigurationSource()).and() // Enable CORS support
                 .authorizeExchange(auth -> auth
-                        .pathMatchers("/api/users/register", "/api/users/welcome").permitAll()
+                        .pathMatchers("/api/users/register", "/api/users/welcome", "/api/auth/status").permitAll()
                         .pathMatchers("/catalogservice/api/books/download/**").permitAll()
                         .pathMatchers("/catalogservice/**").permitAll()
                         .pathMatchers("/storageservice/**").hasRole("ADMIN")
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(formLogin -> formLogin
+                        .authenticationSuccessHandler((webFilterExchange, authentication) -> {
+                            ServerRedirectStrategy redirectStrategy = new DefaultServerRedirectStrategy();
+                            return redirectStrategy.sendRedirect(webFilterExchange.getExchange(), URI.create("http://localhost:5173/"));
+                        })
+                )
                 .authenticationManager(authentication -> {
                     ReactiveAuthenticationManager authenticationManager = authenticationManagerBean(myUserDetailsService);
                     return authenticationManager.authenticate(authentication);

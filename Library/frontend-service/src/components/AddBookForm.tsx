@@ -1,9 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SimpleForm: React.FC = () => {
   const [formData, setFormData] = useState<{ [key: string]: string | number | File }>({});
   const [error, setError] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/auth/status', {
+          withCredentials: true
+        });
+        setIsAuthenticated(response.data.authenticated);
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+    checkAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      window.location.href = 'http://localhost:8080/login'; // Перенаправление на страницу входа
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
