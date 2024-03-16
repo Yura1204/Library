@@ -4,6 +4,7 @@ import CatalogComponent from './components/CatalogComponent';
 import BookDetails from './components/BookDetails';
 import AuthorDetails from './components/AuthorDetails';
 import AddBookForm from './components/AddBookForm';
+import AuthorForm from './components/AddAuthorForm';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
           <Route path='/books/:id' Component={BookDetails}/>
           <Route path="/author/:id" Component={AuthorDetails} />
           <Route path='/books/add' Component={AddBookForm}/>
+          <Route path='/authors/add' Component={AuthorForm}/>
         </Routes>
       </div>
     </Router>
