@@ -25,6 +25,7 @@ const DeleteBookForm: React.FC = () => {
       window.location.href = 'http://localhost:8080/login'; // Перенаправление на страницу входа
     }
   }, [isAuthenticated, navigate]);
+  
   const [formData, setFormData] = useState({
     id: '',
     title: '',

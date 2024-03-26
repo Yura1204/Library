@@ -6,6 +6,7 @@ import AuthorDetails from './components/AuthorDetails';
 import AddBookForm from './components/AddBookForm';
 import AuthorForm from './components/AddAuthorForm';
 import DeleteBookForm from './components/DeleteBookForm';
+import DeleteAuthorForm from './components/DeleteAuthorFrom';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route path='/books/add' Component={AddBookForm}/>
           <Route path='/books/delete' Component={DeleteBookForm}/>
           <Route path='/authors/add' Component={AuthorForm}/>
+          <Route path='authors/delete' Component={DeleteAuthorForm}/>
         </Routes>
       </div>
     </Router>
