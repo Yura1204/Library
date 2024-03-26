@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Launch" type="CompoundRunConfigurationType">
+    <toRun name="CatalogServiceApplication" type="Application" />
+    <toRun name="DiscoveryServerApplication" type="Application" />
+    <toRun name="GatewayServiceApplication" type="Application" />
+    <toRun name="StorageServiceApplication" type="Application" />
+    <method v="2" />
+  </configuration>
+</component>

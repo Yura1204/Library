@@ -26,7 +26,7 @@ public class AuthorController {
         return new ResponseEntity<>(authors, HttpStatus.OK);
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/author/{authorId}")
     public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long authorId) {
         AuthorDTO author = authorService.getAuthorById(authorId);
         if (author != null) {
