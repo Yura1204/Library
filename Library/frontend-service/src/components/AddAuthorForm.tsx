@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styles from './Form.module.css';
 
 const AuthorForm: React.FC = () => {
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
@@ -52,10 +53,10 @@ const AuthorForm: React.FC = () => {
   
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       {error && <div>{error}</div>}
-      <input type="text" name="authorname" onChange={handleChange} />
-      <input type="text" name="biography" onChange={handleChange} />
+      <input type="text" name="authorname" placeholder="Author Name" onChange={handleChange} />
+      <input type="text" name="biography" placeholder="Biography" onChange={handleChange} />
       <button type="submit">Submit</button>
     </form>
   );

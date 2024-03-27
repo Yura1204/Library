@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styles from './Form.module.css';
 
 const SimpleForm: React.FC = () => {
   const [formData, setFormData] = useState<{ [key: string]: string | number | File }>({});
@@ -66,14 +67,14 @@ const SimpleForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       {error && <div>{error}</div>}
-      <input type="text" name="title" onChange={handleChange} />
-      <input type="text" name="authorname" onChange={handleChange} />
-      <input type="text" name="description" onChange={handleChange} />
-      <input type="text" name="genre" onChange={handleChange} />
-      <input type="text" name="publisher" onChange={handleChange} />
-      <input type="number" name="year_published" onChange={handleChange} />
+      <input type="text" name="title" placeholder="Title" onChange={handleChange} />
+      <input type="text" name="authorname" placeholder="Author Name" onChange={handleChange} />
+      <input type="text" name="description" placeholder="Description" onChange={handleChange} />
+      <input type="text" name="genre" placeholder="Genre" onChange={handleChange} />
+      <input type="text" name="publisher" placeholder="Publisher" onChange={handleChange} />
+      <input type="number" name="year_published" placeholder="Year Published" onChange={handleChange} />
       <input type="file" name="book_content" onChange={handleFileChange} />
       <button type="submit">Submit</button>
     </form>

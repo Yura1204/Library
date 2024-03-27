@@ -1,0 +1,67 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .form input[type='text'],
+  .form input[type='number'],
+  .form input[type='file'] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .form input[type='text']:focus,
+  .form input[type='number']:focus,
+  .form input[type='file']:focus {
+    background-color: #555;
+  }
+  
+  .form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .form div {
+    color: #ff0000;
+    margin-bottom: 10px;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

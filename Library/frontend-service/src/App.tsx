@@ -11,7 +11,7 @@ import DeleteAuthorForm from './components/DeleteAuthorFrom';
 const App: React.FC = () => {
   return (
     <Router>
-      <div>
+      <div className="container">
         <h1>BookLibrary</h1>
         <Routes>
           <Route path='/' Component={CatalogComponent}/>

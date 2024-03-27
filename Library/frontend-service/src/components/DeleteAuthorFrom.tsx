@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styles from './Form.module.css';
 
 const DeleteAuthorForm: React.FC = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -54,7 +55,7 @@ const DeleteAuthorForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       {error && <div>{error}</div>}
       <input type="text" name="id" placeholder="ID" onChange={handleChange} />
       <input type="text" name="authorname" placeholder="Author Name" onChange={handleChange} />
